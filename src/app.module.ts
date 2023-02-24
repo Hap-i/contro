@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config/dist';
-import { UsersModule } from './users/users.module';
+import { ConfigService } from '@nestjs/config/dist/config.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -8,7 +11,15 @@ import { UsersModule } from './users/users.module';
       isGlobal: true,
       envFilePath: [`./.env.${process.env.STAGE}`],
     }),
-    UsersModule,
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        return { uri: configService.get('DATABASE_URL') };
+      },
+    }),
+    UserModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
