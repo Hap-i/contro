@@ -4,8 +4,7 @@ import { ConfigService } from '@nestjs/config/dist/config.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { transactionModule } from './transaction/transaction.module';
-import { AccountModule } from './account/account.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
   imports: [
@@ -22,8 +21,7 @@ import { AccountModule } from './account/account.module';
     }),
     UserModule,
     AuthModule,
-    transactionModule,
-    AccountModule,
+    TransactionsModule,
   ],
   controllers: [],
   providers: [],
