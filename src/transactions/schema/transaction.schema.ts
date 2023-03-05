@@ -1,5 +1,6 @@
 import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
+import { Group } from '../../groups/schema/groups.schema';
 import { User } from '../../user/schema/user.schema';
 
 @Schema({ _id: false, versionKey: false })
@@ -32,8 +33,10 @@ export class Transaction {
     required: function () {
       return this.isGroupTransaction === true;
     },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Group',
   })
-  groupId: string;
+  groupId: Group;
 
   @Prop([{ type: TransactionShare }])
   shares: TransactionShare[];

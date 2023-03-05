@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { AccountsModule } from './accounts/accounts.module';
 import { AccountsBucketModule } from './accounts-bucket/accounts-bucket.module';
+import { GroupsModule } from './groups/groups.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AccountsBucketModule } from './accounts-bucket/accounts-bucket.module';
     TransactionsModule,
     AccountsModule,
     AccountsBucketModule,
+    GroupsModule,
   ],
   controllers: [],
   providers: [],
