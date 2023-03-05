@@ -6,14 +6,14 @@ export type GroupDocument = Group & Document;
 
 @Schema({ timestamps: true })
 export class Group {
-  @Prop({ required: true })
+  @Prop({ required: true, trim: true })
   groupName: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
   createdBy: User;
 
-  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }])
-  members: User[];
+  @Prop()
+  members: Record<string, any>[];
 }
 
 export const GroupSchema = SchemaFactory.createForClass(Group);

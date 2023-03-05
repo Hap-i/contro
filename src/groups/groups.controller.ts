@@ -20,10 +20,10 @@ export class GroupsController {
     return this.groupsService.create(createGroupDto);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.groupsService.findAll();
-  // }
+  @Get()
+  findAll() {
+    return this.groupsService.findAll();
+  }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {

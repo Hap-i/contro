@@ -7,7 +7,8 @@ export class CreateGroupDto {
   groupName: string;
 
   @IsNotEmpty()
-  createdBy: string;
+  @IsString()
+  createdBy: User;
 
   @IsNotEmpty()
   members: User[];

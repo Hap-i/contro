@@ -10,9 +10,9 @@ export class GroupsService {
     return this.groupRepository.create(createGroupDto);
   }
 
-  // findAll() {
-  //   return `This action returns all groups`;
-  // }
+  findAll() {
+    return this.groupRepository.find({});
+  }
 
   // findOne(id: number) {
   //   return `This action returns a #${id} group`;
