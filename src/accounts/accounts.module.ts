@@ -11,5 +11,6 @@ import { AccountRepository } from './accounts.repository';
   ],
   controllers: [AccountsController],
   providers: [AccountsService, AccountRepository],
+  exports: [AccountsService],
 })
 export class AccountsModule {}

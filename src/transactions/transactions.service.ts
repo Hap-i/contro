@@ -6,8 +6,18 @@ import { TransactionRepository } from './transactions.repository';
 @Injectable()
 export class TransactionsService {
   constructor(private readonly transactionRepository: TransactionRepository) {}
-  create(createTransactionDto: CreateTransactionDto) {
-    return this.transactionRepository.create(createTransactionDto);
+  async create(createTransactionDto: CreateTransactionDto) {
+    /* One to One Transaction
+    TODO: step-1: start trnasaction
+    TODO: step-2: update transaction table
+    TODO: step-3: find latest account bucket id from account-bucket app
+                  if not available create One account with the transactions 
+                      and updated account-bucket table
+                  if account available then, update the transactions in the account table
+    TODO: step-4: commit the transaction
+    */
+
+    return await this.transactionRepository.create(createTransactionDto);
   }
 
   findAll() {
