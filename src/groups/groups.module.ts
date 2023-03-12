@@ -16,12 +16,16 @@ import { UserService } from '../user/user.service';
         useFactory: (userService: UserService) => {
           const schema = GroupSchema;
           schema.pre('save', async function () {
-            console.log('Pre -middle ware');
-
             const membersPromise = this.members.map(
               async (id) => await userService.findOne(id as unknown as string),
             );
-            this.members = await Promise.all(membersPromise);
+            const membersDetails = await Promise.all(membersPromise);
+            this.members = membersDetails.map((member) => {
+              return {
+                _id: member._id,
+                name: member.name,
+              };
+            });
           });
           return schema;
         },

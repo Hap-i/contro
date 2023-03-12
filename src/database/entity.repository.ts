@@ -24,11 +24,7 @@ export abstract class EntityRepository<T extends Document> {
 
   async create(createEntityData: unknown): Promise<T> {
     try {
-      console.log('Entity');
       const entity = await this.entityModel.create(createEntityData);
-      console.log(entity);
-      // await entity.save();
-      console.log('doc saved');
       return entity;
     } catch (error) {
       if (error.code === 11000) {
