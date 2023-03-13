@@ -12,11 +12,15 @@ export class AccountsBucketService {
     private readonly accountsService: AccountsService,
   ) {}
   async create(createAccountsBucketDto: CreateAccountsBucketDto) {
-    /*
-    STEP-1: Check if account bucket exists or not
-    STEP-2: If exists then return already exists and return the record
-    STEP-3: If not then create One and return
-    */
+    // STEP-1: Check if account bucket exists or not
+    const bucketId = await this.accountBucketRepository.findOne({
+      users: { $all: createAccountsBucketDto.users },
+    });
+    // STEP-2: If exists then return already exists and return the record
+    if (bucketId) {
+      return null;
+    }
+    // STEP-3: If not then create account first
     const accountDto: CreateAccountDto = {
       openingOutstandingAmount: 0,
       noTxnInBucket: 0,
@@ -26,6 +30,7 @@ export class AccountsBucketService {
     };
     const response = await this.accountsService.create(accountDto);
     createAccountsBucketDto.latestBucketId = response._id;
+    // STEP-4: Then create account bucket
     return await this.accountBucketRepository.create(createAccountsBucketDto);
   }
 
