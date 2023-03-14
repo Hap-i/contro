@@ -18,5 +18,6 @@ import { AccountsModule } from '../accounts/accounts.module';
   ],
   controllers: [AccountsBucketController],
   providers: [AccountsBucketService, AccountBucketRepository],
+  exports: [AccountsBucketService],
 })
 export class AccountsBucketModule {}
