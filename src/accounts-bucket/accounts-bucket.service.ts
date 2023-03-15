@@ -3,6 +3,7 @@ import { AccountsService } from '../accounts/accounts.service';
 import { CreateAccountDto } from '../accounts/dto/create-account.dto';
 import { AccountBucketRepository } from './accounts-bucket.repository';
 import { CreateAccountsBucketDto } from './dto/create-accounts-bucket.dto';
+import { FindAccountsBucketDto } from './dto/find-account-bucket.dto';
 // import { UpdateAccountsBucketDto } from './dto/update-accounts-bucket.dto';
 
 @Injectable()
@@ -32,6 +33,16 @@ export class AccountsBucketService {
     createAccountsBucketDto.latestBucketId = response._id;
     // STEP-4: Then create account bucket
     return await this.accountBucketRepository.create(createAccountsBucketDto);
+  }
+
+  async findLatestBucketByUser(findAccountsBucketDto: FindAccountsBucketDto) {
+    try {
+      const bucketId = await this.accountBucketRepository.findOne({
+        users: { $all: findAccountsBucketDto.users },
+      });
+      if (!bucketId) return null;
+      return bucketId.latestBucketId;
+    } catch (error) {}
   }
 
   // findAll() {
