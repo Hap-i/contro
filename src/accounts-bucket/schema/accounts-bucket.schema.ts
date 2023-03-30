@@ -23,7 +23,7 @@ export class AccountBucket {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
   negetiveLender: User;
 
-  @Prop({ required: true })
+  @Prop({ required: true, default: 0 })
   outSatandingAmount: number;
 }
 

@@ -7,14 +7,17 @@ import {
   AccountBucketSchema,
 } from './schema/accounts-bucket.schema';
 import { AccountBucketRepository } from './accounts-bucket.repository';
+import { AccountsModule } from '../accounts/accounts.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: AccountBucket.name, schema: AccountBucketSchema },
     ]),
+    AccountsModule,
   ],
   controllers: [AccountsBucketController],
   providers: [AccountsBucketService, AccountBucketRepository],
+  exports: [AccountsBucketService],
 })
 export class AccountsBucketModule {}

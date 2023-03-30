@@ -9,8 +9,8 @@ export class CreateAccountDto {
   @IsNumber()
   noTxnInBucket: number;
 
-  @IsOptional()
   @IsString()
+  @IsOptional()
   prevBucket: string;
 
   transactions: Record<string, any>[];
